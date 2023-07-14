@@ -1,0 +1,15 @@
+security:
+    # Config du hachage des mots de passe
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        
+
+    # Configuration des firewalls
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    # Configuration des contrôles d'accès
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
