@@ -1,0 +1,21 @@
+{% extends '@EasyAdmin/crud/edit.html.twig' %}
+
+{% block form %}
+    {{ parent() }}
+
+    {# Utiliser une valeur par défaut "Aucun numéro de téléphone" si le champ "telephone" est vide #}
+    {% if form.telephone.vars.value is empty %}
+        <div class="form-group">
+            <label class="col-form-label">{{ form.telephone.vars.label }}</label>
+            <input type="text" class="form-control" value="Aucun numéro de téléphone" disabled>
+        </div>
+    {% endif %}
+
+    {# Utiliser une valeur par défaut "Aucune adresse" si le champ "adresse" est vide #}
+    {% if form.adresse.vars.value is empty %}
+        <div class="form-group">
+            <label class="col-form-label">{{ form.adresse.vars.label }}</label>
+            <input type="text" class="form-control" value="Aucune adresse" disabled>
+        </div>
+    {% endif %}
+{% endblock %}

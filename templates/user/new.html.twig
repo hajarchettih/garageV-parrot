@@ -1,0 +1,12 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block content %}
+    <h1>Create New User</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.password.first) }}
+    {{ form_row(form.password.second) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

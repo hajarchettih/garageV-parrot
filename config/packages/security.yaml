@@ -1,15 +1,51 @@
 security:
-    # Config du hachage des mots de passe
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-        
+        App\Entity\User:
+            algorithm: bcrypt
+        App\Entity\Admin:
+            algorithm: bcrypt
 
-    # Configuration des firewalls
+    # Configuration des fournisseurs d'utilisateurs
+    providers:
+        # Utilisez doctrine pour charger les utilisateurs depuis la base de données
+        database_users:
+            entity:
+                class: App\Entity\User  # Remplacez App\Entity\User par le chemin complet de votre classe User
+                property: email  # Remplacez 'email' par le champ qui représente l'identifiant de l'utilisateur (peut être 'username', 'email', etc.)
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+
+    # Configuration des pare-feux (firewalls)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        main:
+            lazy: true
+            # provider that you set earlier inside providers
+            provider: database_users
+            # Définir la méthode d'authentification (form_login, http_basic, etc.)
+            form_login:
+                login_path: app_login  # Remplacez app_login par l'URL de votre page de connexion
+                check_path: app_login  # Remplacez app_login par l'URL de vérification des informations de connexion
+                default_target_path: app_dashboard  # Remplacez app_dashboard par l'URL de la page de destination après la connexion réussie
+            custom_authenticator: App\Security\UserAuthenticator
+            entry_point: App\Security\UserAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
-    # Configuration des contrôles d'accès
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                always_remember_me: true
+
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+       - { path: ^/user, roles: ROLE_USER }
+       - { path: ^/admin, roles: ROLE_ADMIN }
+
