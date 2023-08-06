@@ -1,3 +1,28 @@
-body {
-    background-color: lightgray;
+html {
+background-color: #F2F2F2;
+}
+
+.navbar {
+background-color : #D92332;
+    
+}
+
+.nav-link {
+font-family: 'Rajdhani', sans-serif;
+}
+
+section {
+background-color: #F2F2F2;
+}
+
+p {
+color: #D92332;
+font-family: 'Rajdhani', sans-serif;
+font-size: 30px; 
+line-height: 1.5; 
+}
+
+h2 {
+font-family: 'Barlow', sans-serif;
+text-align: center;
 }

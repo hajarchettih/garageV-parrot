@@ -10,12 +10,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  class UserController extends AbstractController
 {
-    #[Route(path: "/_form.html.twig", name: AppRoutes::NEW_CONTACT)]
-    public function newContact(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route(path: "/_form.html.twig", name: "new_contact")]
+    public function newContact(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
          return $this->render('_form.html.twig', ['form' => $form->createView()]);
     }
 }
- 

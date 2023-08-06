@@ -1,13 +1,13 @@
 <?php
 
-use App\Entity\User;
+namespace App\Form;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
  class UserType extends AbstractType
 {
@@ -18,21 +18,21 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
                 'required' => true,
                 'label' => "Nom"
             ])
-            ->add('firstname' , TextType::class, [
+            ->add('firstname', TextType::class, [
                 'required' => true,
-                'label'=> "Prénom"
+                'label' => "Prénom"
             ])
-            ->add('phonenumber' , NumberType::class, [
+            ->add('phonenumber', NumberType::class, [
                 'required' => true,
                 'label' => "Numéro de téléphone",
                 'scale' => 0,
                 'attr' => ['maxlength' => 10]
             ])
-            ->add('mail' , EmailType::class, [
+            ->add('mail', EmailType::class, [
                 'required' => true,
                 'label' => "Adresse mail"
             ])
-            ->add ('message' , TextareaType::class, [
+            ->add('message', TextareaType::class, [
                 'required' => true,
                 'label' => "Votre message"
             ])

@@ -1,9 +1,52 @@
-{# templates/home/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h1>Bienvenue sur la page d'accueil</h1>
-        <!-- Ajoutez le contenu de votre page d'accueil ici -->
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <img class="img-thumbnail my-4" 
+                        src="{{ asset('ressources/garage.png') }}" 
+                        alt="logo" 
+                        style="max-width: 300px; max-height: 300px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="{{ asset('ressources/GARAGISTE.png') }}" alt="profil">
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <p>Bonjour et bienvenue, je m’appelle Vincent Parrot et j’ai 15 ans d’expériences dans la réparation d’automobile, j’ai ouvert mon propre garage à Toulouse en 2021.<br>Depuis 2 ans moi et mon équipe nous avons élargies nos services, tel que la réparation de carrosserie et mécanique des voitures ainsi que l’entretien.
+                    Nous mettons aussi en vente des véhicules d’occasion réparés par nos soins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+    <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2 class="text-center my-5">Témoignages</h2>
+            <!-- Add more card columns here -->
+        </div>
     </div>
+                    {#<div class="card-deck">
+                    {% for temoignages in temoignages %}
+                    {% if temoignages.approved %}
+                    <div class="col text-center"> 
+                        <div class="card m-4 bg-secondary event-card" id="temoignages">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ temoignages.name }}</h5>
+                                <p class="card-text">{{ temoignages.content }}</p>
+                                <p class="note-{{ temoignages.id }}">La note laissée est de: {{ temoignages.note }}/5<br> </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% endif %}
+                    {% endfor %}
+
+    </section>
+    #}
 {% endblock %}
+

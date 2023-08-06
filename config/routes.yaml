@@ -12,3 +12,8 @@ admin_dashboard:
 user_new:
     path: /admin/users/new
     controller: App\Controller\Admin\UserCrudController::createUser
+
+app_temoignages:
+    path: /temoignages
+    controller: App\Controller\TemoignagesController::index
+
