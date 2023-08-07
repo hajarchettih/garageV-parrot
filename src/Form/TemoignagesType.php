@@ -1,5 +1,3 @@
-?php
-
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,14 +9,17 @@ class TemoignagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('field_name')
+            ->add('name')
+            ->add('comment')
+            ->add('note')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Temoignages::class,
         ]);
     }
-}<
+}
+
