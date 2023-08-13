@@ -1,20 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TemoignagesController!{% endblock %}
+{% block title %}Témoignages{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="example-wrapper">
+        <h1>Ajouter un témoignage</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/hajar/Desktop/garageV-parrot/garageV-parrot/src/Controller/TemoignagesController.php'|file_link(0) }}">src/Controller/TemoignagesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/hajar/Desktop/garageV-parrot/garageV-parrot/templates/temoignages/index.html.twig'|file_link(0) }}">templates/temoignages/index.html.twig</a></code></li>
-    </ul>
-</div>
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.comment) }}
+        {{ form_row(form.note) }}
+        <button type="submit">Soumettre</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
+

@@ -37,6 +37,10 @@ class TemoignagesController extends AbstractController
     
         return $this->render('temoignages/index.html.twig', [
             'controller_name' => 'TemoignagesController',
+            'temoignages' => $allTemoignages,
+            'form' => $form->createView(),
         ]);
     }
 }
+
+

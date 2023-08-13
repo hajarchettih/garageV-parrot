@@ -1,52 +1,92 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <img class="img-thumbnail my-4" 
-                        src="{{ asset('ressources/garage.png') }}" 
-                        alt="logo" 
-                        style="max-width: 300px; max-height: 300px;">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <img class="img-fluid" src="{{ asset('ressources/GARAGISTE.png') }}" alt="profil">
-                </div>
-                <div class="col-md-6 align-self-center">
-                    <p>Bonjour et bienvenue, je m’appelle Vincent Parrot et j’ai 15 ans d’expériences dans la réparation d’automobile, j’ai ouvert mon propre garage à Toulouse en 2021.<br>Depuis 2 ans moi et mon équipe nous avons élargies nos services, tel que la réparation de carrosserie et mécanique des voitures ainsi que l’entretien.
-                    Nous mettons aussi en vente des véhicules d’occasion réparés par nos soins.</p>
-                </div>
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                {% set logoPath = asset('ressources/garage.png') %}
+                <img class="img-thumbnail my-4" src="{{ logoPath }}" alt="logo" style="max-width: 300px; max-height: 300px;">
             </div>
         </div>
-    </section>
-    <section>
-        <div class="container">
-    <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <h2 class="text-center my-5">Témoignages</h2>
-            <!-- Add more card columns here -->
+        <div class="row">
+            <div class="col-md-4">
+                {% set profilPath = asset('ressources/GARAGISTE.png') %}
+                <img class="img-fluid" src="{{ profilPath }}" alt="profil">
+            </div>
+            <div class="col-md-6 align-self-center">
+                <p>Bonjour et bienvenue, je m’appelle Vincent Parrot et j’ai 15 ans d’expériences dans la réparation d’automobile, j’ai ouvert mon propre garage à Toulouse en 2021.<br>Depuis 2 ans moi et mon équipe nous avons élargi nos services, tels que la réparation de carrosserie et mécanique des voitures ainsi que l’entretien.
+                    Nous mettons aussi en vente des véhicules d’occasion réparés par nos soins.</p>
+            </div>
         </div>
     </div>
-                    {#<div class="card-deck">
-                    {% for temoignages in temoignages %}
-                    {% if temoignages.approved %}
-                    <div class="col text-center"> 
-                        <div class="card m-4 bg-secondary event-card" id="temoignages">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ temoignages.name }}</h5>
-                                <p class="card-text">{{ temoignages.content }}</p>
-                                <p class="note-{{ temoignages.id }}">La note laissée est de: {{ temoignages.note }}/5<br> </p>
+</section>
+<section class="custom-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="text-center my-5">Témoignages</h2>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-md-6 text-start">
+                <a class="btn btn-dark my-2" href="{{ path('app_temoignages')}}" role="button">
+                    Laisser votre témoignage
+                </a>
+            </div>
+            {% set nouveauxTemoignages = [
+                {
+                    'id': 1,
+                    'name': 'Jean Darme',
+                    'content': 'Un excellent service, rapide et efficace. Je suis vraiment satisfait !',
+                    'note': 4.5,
+                    'approved': true
+                },
+                {
+                    'id': 2,
+                    'name': 'Nouveau Client 3',
+                    'content': 'Des réparations impeccables à chaque fois. Je n\'irais nulle part ailleurs !',
+                    'note': 5.0,
+                    'approved': true
+                },
+            ] %}
+            {% set temoignagesApprouves = temoignages | merge(nouveauxTemoignages) %}
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for temoignage in temoignagesApprouves %}
+                        {% set activeClass = loop.first ? 'active' : '' %}
+                        <div class="carousel-item {{ activeClass }}">
+                            <div class="mt-5 card m-2 event-card card-custom mx-5" id="temoignages">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ temoignage.name }}</h5>
+                                    <p class="card-text">{{ temoignage.content }}</p>
+                                    <p class="note-{{ temoignage.id }} note-text">La note laissée est de : {{ temoignage.note }}/5<br> </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    {% endif %}
                     {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="main-section">
+    <!-- Le contenu de votre troisième section -->
+</section>
 
-    </section>
-    #}
+<footer class="container-footer">
+    <!-- Contenu de votre footer -->
+</footer>
 {% endblock %}
+
+
+
 

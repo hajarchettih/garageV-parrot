@@ -13,6 +13,7 @@ font-family: 'Rajdhani', sans-serif;
 
 section {
 background-color: #F2F2F2;
+height: auto;
 }
 
 p {
@@ -22,7 +23,76 @@ font-size: 30px;
 line-height: 1.5; 
 }
 
+h1 {
+font-family: 'Barlow', sans-serif;
+
+}
+
 h2 {
 font-family: 'Barlow', sans-serif;
 text-align: center;
 }
+
+
+.custom-bg {
+                       
+background-color: #D94350;
+padding-bottom: 30px;
+}
+
+.card-custom {
+  max-width: 250px;
+  max-height: 250px;
+  margin: auto;
+  background-color: #F2F2F2;
+  
+}
+
+.card-text {
+  font-size: 20px;
+
+}
+
+.note-text {
+  font-size: 14px;
+}
+
+.custom-button {
+  background-color: #262526;
+  color: #F2F2F2;
+
+}
+
+.text-start {
+  font-family: 'Barlow', sans-serif;
+
+}
+
+.main-section {
+  margin-top: 200px;
+  background-color: #F2F2F2;
+  
+}
+.container-footer {
+  height: auto ; 
+  background-color:#D92332;
+  color: #F2F2F2;
+}
+
+h3{
+
+  font-family: 'Barlow', sans-serif;
+  
+}
+
+.description {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  color: #D94350;
+
+}
+
+
+
+
+

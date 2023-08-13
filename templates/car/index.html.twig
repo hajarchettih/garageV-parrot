@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos occasions{% endblock %}
+
+{% block body %}
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mt-4">Nos occasions</h1>
+            <div class="col-8 text-center description mx-auto">
+                Trouvez la voiture d'occasion idéale sur notre site ! Avec une sélection fiable, des prix compétitifs et un historique complet des véhicules, vous pouvez acheter en toute confiance. Notre équipe est là pour vous aider à trouver le véhicule parfait, simplifier le processus d'achat et vous offrir une expérience agréable.
+            </div>
+            <div class="col-md-12 text-center mt-3">
+                <form method="get" action="{{ path('app_car') }}">
+                    <label for="order_by">Trier par :</label>
+                    <select name="order_by" id="order_by">
+                        <option value="price_asc">Prix croissant</option>
+                        <option value="price_desc">Prix décroissant</option>
+                        <option value="mileage_asc">Kilométrage croissant</option>
+                        <option value="mileage_desc">Kilométrage décroissant</option>
+                        <option value="year_asc">Année croissante</option>
+                        <option value="year_desc">Année décroissante</option>
+                    </select>
+                    <button type="submit">Trier</button>
+                </form>
+            </div>
+            <div class="col-md-12 mt-4">
+                <ul>
+                    {% for car in cars %}
+                        <li>{{ car.brand }} {{ car.model }} - {{ car.price }} €</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
