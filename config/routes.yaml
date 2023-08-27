@@ -4,10 +4,16 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-admin_dashboard:
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+    methods: GET
+
+app_dashboard:
     path: /admin
     controller: App\Controller\Admin\DashboardController::index
     methods: GET
+    
 
 user_new:
     path: /admin/users/new

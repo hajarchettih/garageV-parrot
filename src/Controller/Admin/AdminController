@@ -1,10 +1,10 @@
 <?php
-
 use App\Entity\Admin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class AdminController extends AbstractController
 {
@@ -26,15 +26,8 @@ class AdminController extends AbstractController
         $plainPassword = 'garageparrot2023';
 
         // Mettez à jour le mot de passe haché
-        $admin->updatePasswordHash($plainPassword);
-public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
-    {
-        // set the new hashed password on the User object
-        $user->setPassword($newHashedPassword);
-
-        // execute the queries on the database
-        $this->getEntityManager()->flush();
-    }
+        $hashedPassword = password_hash($plainPassword, PASSWORD_BCRYPT);
+        $admin->setPassword($hashedPassword);
 
         // Enregistrez l'administrateur dans la base de données
         $this->entityManager->persist($admin);
@@ -43,7 +36,30 @@ public function upgradePassword(PasswordAuthenticatedUserInterface $user, string
         // Redirigez vers la page de connexion ou une autre page appropriée
         // ...
 
-        // Retournez une réponse pour corriger la première erreur
+        // Retournez une réponse pour indiquer que l'admin a été créé avec succès
         return new Response('Admin créé avec succès !');
+    }
+
+    #[Route('/upgrade-password/{id}', name: 'upgrade_password')]
+    public function upgradePassword(int $id): Response
+    {
+        // Récupérez l'administrateur depuis la base de données en fonction de l'ID
+        $admin = $this->entityManager->getRepository(Admin::class)->find($id);
+
+        if (!$admin) {
+            throw $this->createNotFoundException('Admin non trouvé pour l\'ID ' . $id);
+        }
+
+        // Mettez à jour le mot de passe haché en utilisant la méthode updatePasswordHash
+        $newHashedPassword = password_hash('nouveaumotdepasse', PASSWORD_BCRYPT);
+        $admin->updatePasswordHash($newHashedPassword);
+
+        // Exécutez les requêtes sur la base de données via l'entity manager
+        $this->entityManager->flush();
+
+        return new Response('Mot de passe mis à jour pour l\'admin avec succès !');
+    }
+}
+
     
 

@@ -6,15 +6,14 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\HasLifecycleCallbacks()]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -26,8 +25,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     private array $roles = ['ROLE_USER'];
 
-    #[Assert\NotBlank(message: "Le mot de passe ne peut pas être vide.")]
+    #[ORM\Column(type: "string", nullable: true)]
     private ?string $plainPassword = null;
+
 
     public function getId(): ?int
     {
@@ -49,21 +49,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function setPassword(string $hashedPassword): void
     {
-        $this->password = $password;
+    $this->password = $hashedPassword;
     }
+
 
     public function getRoles(): array
     {
-        // Assurez-vous que la propriété $roles est toujours initialisée avec au moins le rôle "ROLE_USER"
-        return empty($this->roles) ? ['ROLE_USER'] : $this->roles;
+       
+        return $this->roles ?: ['ROLE_USER'];
     }
 
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
     }
+
+     /**
+     * @ORM\Transient
+     */
 
     public function getPlainPassword(): ?string
     {
@@ -72,27 +77,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getSalt()
     {
-        // Cette méthode est nécessaire en raison de l'implémentation de l'interface, mais inutile dans notre cas car nous utilisons Bcrypt pour le hachage.
+
     }
 
     public function eraseCredentials()
     {
-        // Efface le mot de passe en clair après qu'il a été utilisé pour mettre à jour le mot de passe haché.
+       
         $this->plainPassword = null;
     }
-    
-    public function updatePasswordHash(): void
-    {
-        if ($this->plainPassword !== null) {
-            $this->setPassword(password_hash($this->plainPassword, PASSWORD_BCRYPT));
-            $this->eraseCredentials();
-        }
-    }
 
-    // Méthode pour récupérer l'identifiant de l'utilisateur (nouvelle méthode ajoutée pour Symfony 5.3+)
+    public function updatePasswordHash(UserPasswordHasherInterface $passwordHasher): void
+    {
+        $hashedPassword = $passwordHasher->hashPassword($this, $this->plainPassword);
+        $this->setPassword($hashedPassword);
+        $this->eraseCredentials();
+    }
+    
+    
+   
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
-}
 
+}

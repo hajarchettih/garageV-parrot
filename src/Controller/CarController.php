@@ -29,25 +29,15 @@ class CarController extends AbstractController
             usort($cars, function ($a, $b) {
                 return $a->getPrice() - $b->getPrice();
             });
-        } elseif ($orderBy === 'price_desc') {
-            usort($cars, function ($a, $b) {
-                return $b->getPrice() - $a->getPrice();
-            });
+    
         } elseif ($orderBy === 'mileage_asc') {
             usort($cars, function ($a, $b) {
                 return $a->getMileage() - $b->getMileage();
             });
-        } elseif ($orderBy === 'mileage_desc') {
-            usort($cars, function ($a, $b) {
-                return $b->getMileage() - $a->getMileage();
-            });
+      
         } elseif ($orderBy === 'year_asc') {
             usort($cars, function ($a, $b) {
                 return $a->getYear() - $b->getYear();
-            });
-        } elseif ($orderBy === 'year_desc') {
-            usort($cars, function ($a, $b) {
-                return $b->getYear() - $a->getYear();
             });
         }
         

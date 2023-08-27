@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Service;
 use App\Entity\User;
+use App\Entity\Admin;
 use App\Entity\Horaire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,12 +20,11 @@ class DashboardController extends AbstractDashboardController
         private AdminUrlGenerator $AdminUrlGenerator
     ) {
     }
-
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         $url = $this->AdminUrlGenerator
-            ->setController(TemoignagesCrudController::class)
+            ->setController(ServiceCrudController::class)
             ->generateUrl();
 
         return $this->redirect($url);

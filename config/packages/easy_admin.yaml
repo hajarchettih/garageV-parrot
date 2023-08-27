@@ -1,4 +1,4 @@
-# config/packages/easy_admin.yaml
 easy_admin:
     entities:
-        - App\Entity\User
+        - class: App\Entity\Admin
+          label: 'Admin'
