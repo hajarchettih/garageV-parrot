@@ -23,3 +23,8 @@ app_temoignages:
     path: /temoignages
     controller: App\Controller\TemoignagesController::index
 
+app_usercar:
+    path: /usercar
+    controller: App\Controller\UserCarController::index
+    methods: GET
+

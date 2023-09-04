@@ -2,30 +2,45 @@
 
 namespace App\Entity;
 
-use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: AdminRepository::class)]
-class Admin implements UserInterface, PasswordAuthenticatedUserInterface
+/**
+ * Admin
+ *
+ * @ORM\Table(name="admin", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_880E0D76E7927C74", columns={"email"})})
+ * @ORM\Entity
+ */
+class Admin
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
-
-    #[ORM\Column(type: "json")]
-    private array $roles = ['ROLE_ADMIN'];
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
     /**
-     * @var string The hashed password
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
-    #[ORM\Column]
-    private ?string $password = null;
+    private $email;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json", nullable=false)
+     */
+    private $roles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
+    private $password;
 
     public function getId(): ?int
     {
@@ -44,26 +59,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_ADMIN';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): static
@@ -73,16 +71,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function updatePasswordHash(string $plainPassword): void
-    {
-        $this->setPassword(password_hash($plainPassword, PASSWORD_BCRYPT));
-        $this->eraseCredentials();
-    }
-
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -94,12 +83,5 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+
 }

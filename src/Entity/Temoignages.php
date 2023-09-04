@@ -2,31 +2,59 @@
 
 namespace App\Entity;
 
-use App\Repository\TemoignagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TemoignagesRepository::class)]
+/**
+ * Temoignages
+ *
+ * @ORM\Table(name="temoignages")
+ * @ORM\Entity
+ */
 class Temoignages
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $firstname = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
+     */
+    private $firstname;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lastname = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
+     */
+    private $lastname;
 
-    #[ORM\Column]
-    private ?int $note = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="note", type="integer", nullable=false)
+     */
+    private $note;
 
-    #[ORM\Column(length: 255)]
-    private ?string $comment = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="string", length=255, nullable=false)
+     */
+    private $comment;
 
-    #[ORM\Column]
-    private ?bool $valid = null;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="valid", type="boolean", nullable=false)
+     */
+    private $valid;
 
     public function getId(): ?int
     {
@@ -92,4 +120,6 @@ class Temoignages
 
         return $this;
     }
+
+
 }

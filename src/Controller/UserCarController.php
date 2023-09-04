@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request; // Import manquant pour la classe Request
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Car;
+use App\Entity\UserCar;
 
-class CarController extends AbstractController
+class UserCarController extends AbstractController
 {   
     private $entityManager;
 
@@ -18,12 +18,12 @@ class CarController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/car', name: 'app_car')]
-    public function list(Request $request): Response // Ajout du paramètre $request
+    #[Route('/usercar', name: 'app_car')]
+    public function appCar(Request $request): Response
     {
         $orderBy = $request->query->get('order_by', 'price_asc'); // Ajout du point-virgule
 
-        $cars = $this->entityManager->getRepository(Car::class)->findAll();
+        $cars = $this->entityManager->getRepository(UserCar::class)->findAll();
         
         if ($orderBy === 'price_asc') {
             usort($cars, function ($a, $b) {
@@ -41,9 +41,9 @@ class CarController extends AbstractController
             });
         }
         
-        return $this->render('car/index.html.twig', [
-            'controller_name' => 'CarController',
-            'cars' => $cars,
+        return $this->render('usercar/index.html.twig', [
+            'controller_name' => 'UserCarController',
+            'usercars' => $cars,
         ]);
     }
 }

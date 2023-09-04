@@ -2,23 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\ServiceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ServiceRepository::class)]
+/**
+ * Service
+ *
+ * @ORM\Table(name="service")
+ * @ORM\Entity
+ */
 class Service
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", length=0, nullable=false)
+     */
+    private $content;
 
     public function getId(): ?int
     {
@@ -48,4 +64,6 @@ class Service
 
         return $this;
     }
+
+
 }

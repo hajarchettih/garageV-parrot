@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Car;
+use App\Entity\UserCar;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,32 +17,16 @@ class CarType extends AbstractType
             ->add('fuel')
             ->add('kilometer')
             ->add('price')
-            ->add('details')
-            ->add('carbody')
-            ->add('exteriorcolor')
-            ->add('interiorcolor')
-            ->add('typeengine')
-            ->add('displacement')
-            ->add('power')
-            ->add('gearbox')
-            ->add('speed')
-            ->add('airconditioner')
-            ->add('audiosystem')
-            ->add('navigationsystem')
-            ->add('seating')
-            ->add('security')
-            ->add('other')
-            ->add('state')
-            ->add('maintenancehistory')
-            ->add('tires')
-            ->add('photo')
+            ->add('characteristics')
+            ->add('energy')
+         
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Car::class,
+            'data_class' => UserCar::class,
         ]);
     }
 }

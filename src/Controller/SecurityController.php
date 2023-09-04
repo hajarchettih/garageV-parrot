@@ -17,12 +17,12 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(Request $request, AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager): Response
     {
-        // Créez le formulaire de connexion pour l'administrateur
+       
         $form = $this->createForm(UserLoginFormType::class);
 
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // Récupérez le dernier nom d'utilisateur saisi par l'utilisateur
+    
         $lastUsername = $authenticationUtils->getLastUsername();
 
 
@@ -31,11 +31,11 @@ class SecurityController extends AbstractController
            
             $data = $form->getData();
 
-            // Cherchez l'administrateur par son adresse e-mail
+            // Cherchez l'administrateur/ou user par son e-mail
             $admin = $entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
 
-            // Vérifiez si l'administrateur/ou user existe et que le mot de passe est correct
+            // Vérifiez si l'administrateur/ou user existe et que le mdp est correct
             if ($user && password_verify($data['password'], $user->getPassword())) {
                 return $this->redirectToRoute('user');
 
@@ -49,7 +49,6 @@ class SecurityController extends AbstractController
             }
         }
 
-        // Rendez le formulaire de connexion dans le template twig
         return $this->render('login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
