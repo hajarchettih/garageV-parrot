@@ -2,3 +2,6 @@ easy_admin:
     entities:
         - class: App\Entity\Admin
           label: 'Admin'
+        - class: App\Entity\UserCar
+          label: 'UserCar'
+          

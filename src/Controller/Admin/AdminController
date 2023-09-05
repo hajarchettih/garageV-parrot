@@ -22,8 +22,8 @@ class AdminController extends AbstractController
         $admin = new Admin();
 
         // Définissez les propriétés de l'administrateur, y compris le mot de passe en clair
-        $admin->setEmail('admin@garageparrot.fr');
-        $plainPassword = 'garageparrot2023';
+        $admin->setEmail('');
+        $plainPassword = '';
 
         // Mettez à jour le mot de passe haché
         $hashedPassword = password_hash($plainPassword, PASSWORD_BCRYPT);

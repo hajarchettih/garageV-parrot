@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request; // Import manquant pour la classe 
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\UserCar;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class UserCarController extends AbstractController
 {   
