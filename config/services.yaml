@@ -1,4 +1,5 @@
 parameters:
+    # ...
 
 services:
     Doctrine\ORM\EntityManagerInterface: '@doctrine.orm.entity_manager'
@@ -17,6 +18,9 @@ services:
         arguments:
             $entityManager: '@doctrine.orm.default_entity_manager'
             $passwordHasher: '@security.user_password_hasher'
+
+    App\Controller\Admin\UserCarImageType: ~  
+
 
 
 

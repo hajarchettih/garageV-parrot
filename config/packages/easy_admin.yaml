@@ -4,4 +4,12 @@ easy_admin:
           label: 'Admin'
         - class: App\Entity\UserCar
           label: 'UserCar'
-          
+          form:
+                fields:
+                    - 'name'
+                    - 'price'
+                    - 'year'
+                    - 'kilometer'
+                    - { property: 'energy', type: 'choice' }
+                    - { property: 'images', type: 'collection', type_options: { entry_type: App\Controller\Form\UserCarImageType::class } } 
+                    - { property: 'photo', type: 'image' }

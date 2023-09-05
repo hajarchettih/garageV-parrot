@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Type;
+namespace App\Form;
 
 use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class UsedCarImageType extends AbstractType
+
+class UserCarImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

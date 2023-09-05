@@ -14,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+
+
 class UserCarCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -24,8 +26,8 @@ class UserCarCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+    
     }
-
     public function configureFields(string $pageName): iterable
     {
         yield   TextField::new('name', 'Nom du véhicule');
@@ -33,32 +35,30 @@ class UserCarCrudController extends AbstractCrudController
         yield   IntegerField::new('year', 'Année');
         yield   IntegerField::new('kilometer', 'Nombre de km');
         yield   ChoiceField::new('energy', 'Energy')
-            ->setChoices([
-                'Essence' => 'Essence',
-                'Diesel' => 'Diesel',
-                'Hybrid' => 'Hybrid',
-                'Electrique' => 'Electrique'
-            ]);
+                    ->setChoices([
+                        'Essence' => 'Essence',
+                        'Diesel' => 'Diesel', 
+                        'Hybrid' => 'Hybrid',
+                        'Elctrique' => 'Electrique'
+                    ]);
+    
 
-        $characteristics = '**Pour faire un retour à la ligne ";" et pour mettre en gras, mettez des "{}" ';
+       /*yield CollectionField::new('images')
+                    ->setEntryType(UserCarImageType::class);
 
-        yield TextareaField::new('characteristics', 'Caractéristiques')
-            ->setHelp("<strong><u>$characteristics</u></strong>");
+                    yield ImageField::new('photo')
+                            ->setBasePath('uploads/images')
+                            ->setUploadDir('public/uploads/images')
+                            ->setSortable(false);*/
 
-        yield CollectionField::new('images')
-            ->setEntryType(UserCarImageType::class);
-
-        yield ImageField::new('photo')
-            ->setBasePath('uploads/images')
-            ->setUploadDir('public/uploads/images')
-            ->setSortable(false);
     }
-
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('un nouveau véhicule d\'occasion')
-            ->setPageTitle('index', 'Voitures d\'occasion')
-            ->setPaginatorPageSize(15);
+        ->setEntityLabelInSingular('un nouveau véhicule d\'occasion')
+        ->setPageTitle('index', 'Voitures d\'occasion')
+        ->setPaginatorPageSize(15);
+        
     }
+
 }
