@@ -4,55 +4,88 @@
 
 {% block body %}
 <section>
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center mt-4">Nos occasions</h1>
-            <div class="col-8 text-center description mx-auto">
-                Trouvez la voiture d'occasion idéale sur notre site ! Avec une sélection fiable, des prix compétitifs et un historique complet des véhicules, vous pouvez acheter en toute confiance. Notre équipe est là pour vous aider à trouver le véhicule parfait, simplifier le processus d'achat et vous offrir une expérience agréable.
-            </div>
-            <div class="col-md-12 text-center mt-3">
-                <form method="get" action="{{ path('app_car') }}">
-                    <label for="order_by">Trier par :</label>
-                    <select name="order_by" id="order_by">
-                        <option value="price_asc">Prix</option>
-                        <option value="mileage_asc">Kilométrage</option>
-                        <option value="year_asc">Année</option>
-                    </select>
-                    <button type="submit">Trier</button>
-                </form>
-            </div>
-            <div class="col-md-12 mt-4">
-             <div class="card-container">
-                <ul>
-                    {% for car in usercars %}
-                    <li>{{ car.brand }} {{ car.model }} - {{ car.price }} €</li>
-                    {% endfor %}
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for car in usercars %}
+                <div class="col-auto col-md-auto cars-filter" id="car" data-year={{ car.year }} data-kilometer={{ car.kilometer }} data-price={{ car.price }}>
+                    <div class="card m-1 event-card my-custom-card">
+                        <img src="{{ asset('public/ressources' ~ car.photo)}}" class="d-block w-100 h-auto img-fluid" style="max-width: 300px; height: 400px;" alt="Car Image">
+                        <div class="card-body" id="card-body">
+                            <h5 class="card-title" id="nameCar{{ loop.index }}">{{ car.name }}</h5>
+                            <div class="custom-card-text">
+                                <p class="desc" id="price">Prix: {{ car.price }}€</p>
+                                <p class="desc" id="annee">Première immatriculation: {{ car.year }}</p>
+                                <p class="desc" id="km">Nombre de km: {{ car.kilometer }}km</p>
+                                <p class="desc" id="energy">Moteur: {{ car.energy }}</p>
+                            </div>
+                            <button type="button" class="btn btn-success col-12 my-1" data-bs-toggle="modal" data-bs-target="#exampleModal{{ loop.index }}">
+                                Détails
+                            </button>
+                            <div class="modal fade" id="exampleModal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel{{ loop.index }}">{{ car.name }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% if car.characteristics is defined and car.characteristics|length > 0 %}
+                                                {% set hasSemicolon = ';' in car.characteristics %}
+                                                {% set formattedCharacteristics = car.characteristics|replace({';': '<br>', '{': '<strong>', '}': '</strong>'}) %}
 
-                </ul>
+                                                {% if hasSemicolon %}
+                                                    <p class="characteristics">{{ formattedCharacteristics|raw }}</p>
+                                                {% else %}
+                                                    <p class="characteristics">{{ formattedCharacteristics|raw }}</p>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" onclick="preRemplir({{ 'nameCar' ~ loop.index }})" class="btn btn-success col-12" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                Je suis intéressé
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Modal
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1 class="text-center my-4">Votre demande</h1>
+                
+                <p>Formulaire à ajouter ici</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
-    <div class="card mt-4" style="width: 18rem;">
-  <img class="card-img-top fixed-size-image mt-3" src="{{ asset('ressources/citroen/citroen.png') }}" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
 </div>
-<div class="card mt-4" style="width: 18rem;">
-  <img class="card-img-top fixed-size-image mt-3" src="{{ asset('ressources/mercedes/mercedes.png') }}" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-</div>
-</section>
 
-
+<script>
+function preRemplir(nameCar) {
+    const carName = document.getElementById(nameCar.id).textContent;
+    const contentField = document.querySelector("#contact_content");
+    contentField.value = 'Je vous contacte pour la ' + carName;
+}
+</script>
+-->
 {% endblock %}
+
 
 
 

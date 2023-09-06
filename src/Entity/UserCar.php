@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserCarRepository::class)
@@ -57,16 +58,17 @@ class UserCar
      * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="userCars")
      */
     //private ?Contact $contact = null;
-
     /**
      * @ORM\Column(length=255, nullable=true)
+     * @Vich\UploadableField(mapping="user_car_images", fileNameProperty="photo")
      */
     private ?string $photo = null;
 
     public function __construct()
     {
-       // $this->images = new ArrayCollection();
+       
     }
+    
 
     public function getId(): ?int
     {
@@ -144,4 +146,17 @@ class UserCar
 
         return $this;
     }
+
+    public function getPhoto(): ?string
+    {
+    return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+    $this->photo = $photo;
+
+    return $this;
+    }
+
 }

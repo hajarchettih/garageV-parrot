@@ -92,17 +92,37 @@ h3{
 
 }
 
-.card-container {
-  display: flex; /* Afficher les cartes en ligne */
-  justify-content: space-between; /* Ajouter un espace entre les cartes */
-  flex-wrap: wrap; /* Permettre le retour à la ligne lorsque l'espace est insuffisant */
+/* Fichier CSS personnalisé */
+.my-custom-card {
+  /* Ajoutez vos styles personnalisés ici */
+  height: 400px; /* Réduisez la hauteur de la carte */
 }
 
-.fixed-size-image {
-  width: 200px; /* Définissez la largeur souhaitée */
-  height: 200px; /* Définissez la hauteur souhaitée */
-  object-fit: cover; /* Permet de conserver les proportions de l'image tout en la redimensionnant */
+.desc {
+
+  color: #262526;
+  font-size: 15px;
+
 }
+
+
+.my-custom-card img {
+  max-width: 320px;
+  height: 200px; /* Réduisez la hauteur de l'image */
+}
+
+.my-custom-card  {
+  /* Ajoutez des styles pour le texte de la carte */
+  font-size: 10px; /* Réduisez la taille de la police du texte */
+}
+
+.my-custom-card .card-title {
+  /* Ajoutez des styles pour le titre de la carte */
+  font-size: 16px; /* Réduisez la taille de la police du titre */
+}
+
+
+
 
 
 

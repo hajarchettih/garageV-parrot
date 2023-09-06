@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Image;
 use App\Entity\UserCar;
+use App\Form\UserCarImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -29,29 +31,26 @@ class UserCarCrudController extends AbstractCrudController
     
     }
     public function configureFields(string $pageName): iterable
-    {
-        yield   TextField::new('name', 'Nom du véhicule');
-        yield   IntegerField::new('price', 'Prix');
-        yield   IntegerField::new('year', 'Année');
-        yield   IntegerField::new('kilometer', 'Nombre de km');
-        yield   ChoiceField::new('energy', 'Energy')
-                    ->setChoices([
-                        'Essence' => 'Essence',
-                        'Diesel' => 'Diesel', 
-                        'Hybrid' => 'Hybrid',
-                        'Elctrique' => 'Electrique'
-                    ]);
-    
+{
+    yield TextField::new('name', 'Nom du véhicule');
+    yield IntegerField::new('price', 'Prix');
+    yield IntegerField::new('year', 'Année');
+    yield IntegerField::new('kilometer', 'Nombre de km');
+    yield ChoiceField::new('energy', 'Energy')
+        ->setChoices([
+            'Essence' => 'Essence',
+            'Diesel' => 'Diesel', 
+            'Hybrid' => 'Hybrid',
+            'Electrique' => 'Electrique'
+        ]);
+    yield TextareaField::new('characteristics', 'Caractéristiques');
 
-       /*yield CollectionField::new('images')
-                    ->setEntryType(UserCarImageType::class);
+    yield ImageField::new('photo')
+        ->setBasePath('ressources')
+        ->setUploadDir('public/ressources')
+        ->setSortable(false);
+}
 
-                    yield ImageField::new('photo')
-                            ->setBasePath('uploads/images')
-                            ->setUploadDir('public/uploads/images')
-                            ->setSortable(false);*/
-
-    }
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
