@@ -28,3 +28,8 @@ app_usercar:
     controller: App\Controller\UserCarController::index
     methods: GET
 
+app_horaire:
+    path: /horaire
+    controller: App\Controller\HoraireController::index
+
+

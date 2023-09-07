@@ -9,10 +9,9 @@
             {% for car in usercars %}
                 <div class="col-auto col-md-auto cars-filter" id="car" data-year={{ car.year }} data-kilometer={{ car.kilometer }} data-price={{ car.price }}>
                     <div class="card m-1 event-card my-custom-card">
-                        <img src="{{ asset('public/ressources' ~ car.photo)}}" class="d-block w-100 h-auto img-fluid" style="max-width: 300px; height: 400px;" alt="Car Image">
-                        <div class="card-body" id="card-body">
+                        <img src="{{ asset('ressources/' ~ car.photo) }}" class="d-block w-100 h-auto img-fluid" style="max-width: 300px; height: 400px;" alt="Car Image">
                             <h5 class="card-title" id="nameCar{{ loop.index }}">{{ car.name }}</h5>
-                            <div class="custom-card-text">
+                            <div class="custom-card-text mx-auto">
                                 <p class="desc" id="price">Prix: {{ car.price }}€</p>
                                 <p class="desc" id="annee">Première immatriculation: {{ car.year }}</p>
                                 <p class="desc" id="km">Nombre de km: {{ car.kilometer }}km</p>
@@ -41,49 +40,34 @@
                                             {% endif %}
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+                                            <button type="button" class="btn custom-close-button" data-bs-dismiss="modal">Fermer</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" onclick="preRemplir({{ 'nameCar' ~ loop.index }})" class="btn btn-success col-12" data-bs-toggle="modal" data-bs-target="#contactModal">
-                                Je suis intéressé
-                            </button>
+                            <button type="button" class="btn btn-success col-12" data-bs-toggle="modal" data-bs-target="#userInterestModal{{ loop.index }}">
+                            Je suis intéressé
+                        </button>
+                        
+                        <div class="modal fade" id="userInterestModal{{ loop.index }}" tabindex="-1" aria-labelledby="userInterestModalLabel{{ loop.index }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="userInterestModalLabel{{ loop.index }}">Je suis intéressé</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            {% endfor %} 
         </div>
     </div>
 </section>
-<!-- Modal
-<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h1 class="text-center my-4">Votre demande</h1>
-                
-                <p>Formulaire à ajouter ici</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-function preRemplir(nameCar) {
-    const carName = document.getElementById(nameCar.id).textContent;
-    const contentField = document.querySelector("#contact_content");
-    contentField.value = 'Je vous contacte pour la ' + carName;
-}
-</script>
--->
 {% endblock %}
 
 

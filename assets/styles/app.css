@@ -92,10 +92,9 @@ h3{
 
 }
 
-/* Fichier CSS personnalisé */
-.my-custom-card {
-  /* Ajoutez vos styles personnalisés ici */
-  height: 400px; /* Réduisez la hauteur de la carte */
+h5 {
+  text-align: center;
+
 }
 
 .desc {
@@ -105,21 +104,12 @@ h3{
 
 }
 
-
-.my-custom-card img {
-  max-width: 320px;
-  height: 200px; /* Réduisez la hauteur de l'image */
+.btn custom-close-button {
+  background-color: #262526; 
+  font-family: 'Barlow', sans-serif;
+  color: #F2F2F2;
 }
 
-.my-custom-card  {
-  /* Ajoutez des styles pour le texte de la carte */
-  font-size: 10px; /* Réduisez la taille de la police du texte */
-}
-
-.my-custom-card .card-title {
-  /* Ajoutez des styles pour le titre de la carte */
-  font-size: 16px; /* Réduisez la taille de la police du titre */
-}
 
 
 

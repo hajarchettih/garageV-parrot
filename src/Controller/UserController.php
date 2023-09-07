@@ -1,20 +1,47 @@
 <?php
 
 namespace App\Controller;
-use App\Form\UserType;
-use App\Entity\User;
+
+use App\Entity\User; // Assurez-vous que vous importez correctement la classe User
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
- class UserController extends AbstractController
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+class UserController extends AbstractController
 {
-    #[Route(path: "/_form.html.twig", name: "new_contact")]
-    public function newContact(Request $request): Response
+    /**
+     * @Route("/user-form", name="user_form")
+     */
+    public function userForm(Request $request): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-         return $this->render('_form.html.twig', ['form' => $form->createView()]);
+        $user = new User(); // Remplacez User par le nom de votre modèle
+
+        $form = $this->createFormBuilder($user)
+            ->add('name', TextType::class, [
+                'label' => 'Nom',
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Envoyer',
+                'attr' => ['class' => 'btn btn-success'],
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Traitez le formulaire ici, par exemple, enregistrez les données dans la base de données.
+            // Redirigez ensuite ou affichez un message de succès.
+        }
+
+        return $this->render('votre_template/_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

@@ -1,0 +1,12 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block content %}
+    <h1>Créer un nouveau service</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.content) }}
+
+    <button type="submit" class="btn btn-primary">Créer le service</button>
+    {{ form_end(form) }}
+{% endblock %}

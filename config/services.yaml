@@ -21,6 +21,9 @@ services:
 
     App\Controller\Admin\UserCarImageType: ~  
 
+    App\Controller\UserController:
+        public: true
+
 
 
 
