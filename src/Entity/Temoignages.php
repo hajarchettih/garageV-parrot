@@ -2,86 +2,65 @@
 
 namespace App\Entity;
 
+use App\Repository\TemoignagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Temoignages
- *
- * @ORM\Table(name="temoignages")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=TemoignagesRepository::class)
  */
 class Temoignages
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
+    private ?string $name = null;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
+     * @ORM\Column(type="boolean")
      */
-    private $lastname;
+    private bool $approved = false;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="note", type="integer", nullable=false)
+     * @ORM\Column(type="text")
      */
-    private $note;
+    private ?string $content = null;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="comment", type="string", length=255, nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $comment;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="valid", type="boolean", nullable=false)
-     */
-    private $valid;
+    private ?int $note = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFirstname(): ?string
+    public function getName(): ?string
     {
-        return $this->firstname;
+        return $this->name;
     }
 
-    public function setFirstname(string $firstname): static
+    public function setName(string $name): self
     {
-        $this->firstname = $firstname;
-
+        $this->name = $name;
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getContent(): ?string
     {
-        return $this->lastname;
+        return $this->content;
     }
 
-    public function setLastname(string $lastname): static
+    public function setContent(string $content): self
     {
-        $this->lastname = $lastname;
-
+        $this->content = $content;
         return $this;
     }
 
@@ -90,36 +69,20 @@ class Temoignages
         return $this->note;
     }
 
-    public function setNote(int $note): static
+    public function setNote(int $note): self
     {
         $this->note = $note;
-
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getApproved(): bool
     {
-        return $this->comment;
+        return $this->approved;
     }
 
-    public function setComment(string $comment): static
+    public function setApproved(bool $approved): self
     {
-        $this->comment = $comment;
-
+        $this->approved = $approved;
         return $this;
     }
-
-    public function isValid(): ?bool
-    {
-        return $this->valid;
-    }
-
-    public function setValid(bool $valid): static
-    {
-        $this->valid = $valid;
-
-        return $this;
-    }
-
-
 }

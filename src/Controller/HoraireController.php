@@ -2,17 +2,27 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HoraireController extends AbstractController
 {
-    #[Route('/infos/pratiques', name: 'app_infos_pratiques')]
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    #[Route('/horaire', name: 'app_horaire')]
     public function index(): Response
     {
-        return $this->render('infos_pratiques/index.html.twig', [
-            'controller_name' => 'InfosPratiquesController',
+        $this->entityManager;
+
+        return $this->render('horaire/index.html.twig', [
+            'controller_name' => 'HoraireController',
         ]);
     }
 }

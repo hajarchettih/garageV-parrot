@@ -3,35 +3,18 @@
 {% block title %}Nos Services{% endblock %}
 
 {% block body %}
-<section>
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center mt-4">Nos Services<h1>
-            <h2 class="text-start mt-4 mx-5">Réparation de véhicule</h2>
-            <div class="description col-md-8 mx-5">Nous proposons une gamme complète de services de réparations mécaniques pour tous types de véhicules.<br>
- Que vous ayez besoin d'une réparation mineure ou d'une intervention plus complexe, notre équipe de technicien(ne)s qualifié(e)s est là pour vous offrir un service fiable et professionnel.<br>
- Nous comprenons à quel point il est important de maintenir votre véhicule en bon état de fonctionnement.<br>C'est pourquoi nous effectuons des diagnostics précis et utilisons des équipements de pointe pour identifier et résoudre rapidement les problèmes mécaniques.<br> Que ce soit un souci avec le moteur, la transmission, les freins, la suspension ou tout autre composant, notre équipe expérimentée saura trouver la solution adaptée.<br>
-Nos services de réparations mécaniques comprennent le remplacement de pièces défectueuses, les ajustements et les réglages nécessaires, ainsi que les réparations spécialisées pour garantir la performance optimale de votre véhicule.<br> Nous travaillons avec des pièces de qualité provenant de fabricants réputés, ce qui garantit la fiabilité et la durabilité de nos réparations. </div>
+{% for service in services %}
+    <div class="col-auto col-md-auto service-filter">
+        <div class="card m-1 event-card my-custom-card">
+           
+            <h5 class="card-title">{{ service.name }}</h5>
+            <div class="custom-card-text mx-auto">
+                <p class="desc">{{ service.content }}</p>
+                
+            </div>
         </div>
     </div>
-</section>
-<section>
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-start mt-4 mx-5">Entretien</h2>
-            <div class="description col-md-8 mx-5">
-          Nous proposons des entretiens complet pour votre véhicule.<br>Nos technicien(ne)s qualifié(e)s effectuent les vidanges d'huile, les remplacements de filtres, les ajustements nécessaires et les inspections recommandées par le fabricant.<br> Nous utilisons des produits de qualité et des techniques professionnelles pour assurer la fiabilité et la performance de votre véhicule. En plus de l'entretien standard, nous offrons des services complémentaires tels que la vérification de la batterie, des freins, de l'éclairage, des pneus, etc.<br> Notre objectif est de vous offrir un service rapide, efficace et sans tracas.<br> Confiez nous l'entretien périodique de votre véhicule pour une expérience de qualité et des recommandations personnalisées.
-        </div>
-    </div>
-</section>
-<section>
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-start mt-4 mx-5">Carrosserie</h2>
-            <div class="description col-md-8 mx-5 mb-5">
-          Nous proposons des services complets de réparation de carrosserie pour redonner à votre véhicule son apparence d'origine.<br>Nos technicien(ne)s spécialisé(e)s sont expérimentés dans le redressement de la tôle, le remplacement de pièces endommagées et la peinture.<br> Que ce soit suite à un accident ou à des dommages extérieurs, nous sommes là pour restaurer l'esthétique de votre véhicule. Nous utilisons des techniques avancées et des matériaux de haute qualité pour garantir des résultats durables et esthétiquement plaisants. Faites confiance à notre expertise en réparation de carrosserie pour redonner à votre véhicule son allure d'origine.
-        </div>
-    </div>
-</section>
+{% endfor %}
+
 {% endblock %}
 

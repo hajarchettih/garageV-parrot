@@ -2,18 +2,18 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Horaire;
+use App\Entity\Adresse;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class HoraireCrudController extends AbstractCrudController
+class AdresseCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Horaire::class;
+        return Adresse::class;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -22,22 +22,16 @@ class HoraireCrudController extends AbstractCrudController
     }
     public function configureFields(string $pageName): iterable
     {
-        yield    TextField::new('days', 'Jour');
-        yield    TextField::new('open', 'Horaire d\'ouverture');
+        yield    TextField::new('street', 'Rue');
+        yield    TextField::new('city', 'Ville');
+        yield    TextField::new('zipCode', 'Code postal');
+        yield    TextField::new('phoneNumber', 'Numéro de téléphone');
     }
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('un jour d\'ouverture')
-            ->setPageTitle('index', 'Jours d\'ouverture')
-            ->setPaginatorPageSize(7);
+            ->setEntityLabelInSingular('une adresse')
+            ->setPageTitle('index', 'Adresse du garage')
+            ->setPaginatorPageSize(5);
     }
 }
-
-
-
-
-
-
-
-

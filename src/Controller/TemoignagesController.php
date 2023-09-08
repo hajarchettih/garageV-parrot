@@ -9,14 +9,17 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Temoignages;
 use App\Form\TemoignagesType;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TemoignagesRepository;
 
 class TemoignagesController extends AbstractController
 {
     private $entityManager;
-    public function __construct(EntityManagerInterface $entityManager)
+    private $temoignagesRepository; 
+
+    public function __construct(EntityManagerInterface $entityManager, TemoignagesRepository $temoignagesRepository)
     {
         $this->entityManager = $entityManager;
-        
+        $this->temoignagesRepository = $temoignagesRepository;
     }
 
     #[Route('/temoignages', name: 'app_temoignages')]
@@ -28,16 +31,18 @@ class TemoignagesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-        $this->entityManager->persist($temoignages);
-        $this->entityManager->flush();
+            $this->entityManager->persist($temoignages);
+            $this->entityManager->flush();
 
-        $this->addFlash('sucess','Votre témoignage a été soumis avec succès.');
+            $this->addFlash('success', 'Votre témoignage a été soumis avec succès.');
+        }
 
-    }
-    
+        // Récupérez les témoignages depuis la base de données
+        $allTemoignages = $this->temoignagesRepository->findAll();
+
         return $this->render('temoignages/index.html.twig', [
             'controller_name' => 'TemoignagesController',
-            'temoignages' => $allTemoignages,
+            'temoignages' => $allTemoignages, // Passez les témoignages à la vue
             'form' => $form->createView(),
         ]);
     }
