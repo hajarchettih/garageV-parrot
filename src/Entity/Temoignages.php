@@ -10,12 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Temoignages
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id = null;
+   /**
+ * @ORM\Id
+ * @ORM\GeneratedValue
+ * @ORM\Column(type="integer")
+ */
+        private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -58,11 +58,11 @@ class Temoignages
         return $this->content;
     }
 
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-        return $this;
-    }
+    public function setContent(?string $content): self
+{
+    $this->content = $content;
+    return $this;
+}
 
     public function getNote(): ?int
     {
