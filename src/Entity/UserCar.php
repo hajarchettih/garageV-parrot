@@ -55,9 +55,22 @@ class UserCar
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="userCars")
+     * @ORM\ManyToOne(targetEntity=Contact::class, inversedBy="userCar")
      */
-    //private ?Contact $contact = null;
+     private ?Contact $contact = null;
+     public function getContact(): ?Contact
+    {
+    return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+    $this->contact = $contact;
+
+    return $this;
+    }
+
+     
     /**
      * @ORM\Column(length=255, nullable=true)
      * @Vich\UploadableField(mapping="user_car_images", fileNameProperty="photo")

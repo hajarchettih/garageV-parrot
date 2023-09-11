@@ -62,7 +62,7 @@ class DashboardController extends AbstractDashboardController
             ->setAction(Crud::PAGE_INDEX);
         }
 
-        if ($this->isGranted('ROLE_ADMIN')) {
+     {
         yield MenuItem::subMenu('Annonce', 'fas fa-car')->setSubItems([
             MenuItem::linkToCrud('Créer une nouvelle annonce', 'fas fa-car', UserCar::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Aperçu des annonces', 'fas fa-eye', UserCar::class)
