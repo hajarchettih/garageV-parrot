@@ -2,65 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Temoignage;
+use App\Entity\Temoignages;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Temoignage>
- *
- * @method Temoignage|null find($id, $lockMode = null, $lockVersion = null)
- * @method Temoignage|null findOneBy(array $criteria, array $orderBy = null)
- * @method Temoignage[]    findAll()
- * @method Temoignage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @extends ServiceEntityRepository<Temoignages>
  */
-class TemoignageRepository extends ServiceEntityRepository
+class TemoignagesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Temoignage::class);
+        parent::__construct($registry, Temoignages::class);
     }
 
-    public function save(Temoignage $entity, bool $flush = false): void
+    // Ajoutez la méthode pour récupérer les témoignages approuvés ici
+    public function findApprovedTemoignages()
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.approved = :approved')
+            ->setParameter('approved', true)
+            ->getQuery()
+            ->getResult();
     }
-
-    public function remove(Temoignage $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-//    /**
-//     * @return Temoignage[] Returns an array of Temoignage objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Temoignage
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

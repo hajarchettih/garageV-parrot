@@ -3,9 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,31 +18,35 @@ class Contact
      */
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    /**
+     * @ORM\Column(length=255)
+     */
     private ?string $firstName = null;
 
-    #[ORM\Column(length: 100)]
+    /**
+     * @ORM\Column(length=255)
+     */
     private ?string $lastName = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    /**
+     * @ORM\Column(length=255)
+     */
+    private ?string $mail = null;
 
-    #[ORM\Column(length: 15)]
+    /**
+     * @ORM\Column(length=15)
+     */
     private ?string $phoneNumber = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    /**
+     * @ORM\Column(type="text")
+     */
     private ?string $content = null;
 
-    #[ORM\Column(type:"boolean")]
-    private $approved = false;
-
-    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: UserCar::class)]
-    private Collection $carContact;
-
-    public function __construct()
-    {
-        $this->carContact = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $approved = false;
 
     public function getId(): ?int
     {
@@ -57,10 +58,9 @@ class Contact
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): static
+    public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
-
         return $this;
     }
 
@@ -69,22 +69,20 @@ class Contact
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): static
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getMail(): ?string
     {
-        return $this->email;
+        return $this->mail;
     }
 
-    public function setEmail(string $email): static
+    public function setMail(string $mail): self
     {
-        $this->email = $email;
-
+        $this->mail = $mail;
         return $this;
     }
 
@@ -93,10 +91,9 @@ class Contact
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(string $phoneNumber): static
+    public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
-
         return $this;
     }
 
@@ -105,10 +102,9 @@ class Contact
         return $this->content;
     }
 
-    public function setContent(string $content): static
+    public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -120,36 +116,6 @@ class Contact
     public function setApproved(bool $approved): self
     {
         $this->approved = $approved;
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, UserCar>
-     */
-    public function getCarContact(): Collection
-    {
-        return $this->carContact;
-    }
-
-    public function addCarContact(UserCar $carContact): static
-    {
-        if (!$this->carContact->contains($carContact)) {
-            $this->carContact->add($carContact);
-            $carContact->setContact($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCarContact(UserCar $carContact): static
-    {
-        if ($this->carContact->removeElement($carContact)) {
-            // set the owning side to null (unless already changed)
-            if ($carContact->getContact() === $this) {
-                $carContact->setContact(null);
-            }
-        }
-
         return $this;
     }
 }

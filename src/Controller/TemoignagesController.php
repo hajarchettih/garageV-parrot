@@ -1,9 +1,7 @@
 <?php
 
-
 namespace App\Controller;
 
-use App\Entity\Horaire;
 use App\Entity\Temoignages;
 use App\Form\TemoignagesType;
 use App\Repository\AdresseRepository;
@@ -28,34 +26,37 @@ class TemoignagesController extends AbstractController
     }
 
     #[Route('/temoignages', name: 'app_temoignages', methods: ['GET', 'POST'])]
-    public function index(Request $request, AdresseRepository $adresseRepository, HoraireRepository $horaireRepository): Response
-    {
-        $temoignages = new Temoignages();
-        $temoignages->setApproved(false);
-    
-        $form = $this->createForm(TemoignagesType::class, $temoignages);
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $note = $data->getNote();
-    
-            if ($note < 0 || $note > 5) {
-                $form->get('note')->addError(new FormError('La note doit être comprise entre 0 et 5.'));
-            } else {
-                $this->entityManager->persist($temoignages);
-                $this->entityManager->flush();
-    
-                return $this->redirectToRoute('app_temoignages_success');
-            }
+        public function index(Request $request, AdresseRepository $adresseRepository, HoraireRepository $horaireRepository, TemoignagesRepository $temoignagesRepository): Response
+{
+    $temoignages = new Temoignages();
+    $temoignages->setApproved(false);
+
+    $form = $this->createForm(TemoignagesType::class, $temoignages);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+        $note = $data->getNote();
+
+        if ($note < 0 || $note > 5) {
+            $form->get('note')->addError(new FormError('La note doit être comprise entre 0 et 5.'));
+        } else {
+            $this->entityManager->persist($temoignages);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_temoignages_success');
         }
-    
-        return $this->render('temoignages/index.html.twig', [
-            'form' => $form->createView(),
-            'adresse' => $adresseRepository->findOneBy([], []),
-            'horaire' => $horaireRepository->findBy([], []),
-        ]);
     }
+    
+    $temoignages = $temoignagesRepository->findApprovedTemoignages();
+
+    return $this->render('temoignages/index.html.twig', [
+        'form' => $form->createView(),
+        'adresse' => $adresseRepository->findOneBy([], []),
+        'horaire' => $horaireRepository->findBy([], []),
+        'temoignages' => $temoignages, 
+    ]);
+}
     
 
     #[Route('/temoignages/success', name: 'app_temoignages_success', methods: ['GET'])]
@@ -74,20 +75,20 @@ class TemoignagesController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/temoignage/approuver/{id}', name: 'admin_temoignage_approuver')]
-    public function approuverTemoignage(Temoignages $temoignage): Response
+    #[Route('/admin/temoignages/approuver/{id}', name: 'admin_temoignages_approuver')]
+    public function approuverTemoignages(Temoignages $temoignages): Response
     {
-        $temoignage->setApproved(true);
-        $this->entityManager->flush();
+        $temoignages->setApproved(true); // Approuver le témoignage
+        $this->entityManager->flush(); // Enregistrer les changements
 
         return $this->redirectToRoute('admin_temoignages');
     }
 
-    #[Route('/admin/temoignage/desapprouver/{id}', name: 'admin_temoignage_desapprouver')]
-    public function desapprouverTemoignage(Temoignages $temoignage): Response
+    #[Route('/admin/temoignages/desapprouver/{id}', name: 'admin_temoignages_desapprouver')]
+    public function desapprouverTemoignages(Temoignages $temoignages): Response
     {
-        $temoignage->setApproved(false);
-        $this->entityManager->flush();
+        $temoignages->setApproved(false); // Désapprouver le témoignage
+        $this->entityManager->flush(); // Enregistrer les changements
 
         return $this->redirectToRoute('admin_temoignages');
     }

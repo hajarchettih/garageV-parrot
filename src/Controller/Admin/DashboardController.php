@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Service;
 use App\Entity\User;
-use App\Entity\Admin;
+use App\Entity\Contact;
 use App\Entity\Adresse;
 use App\Entity\Horaire;
 use App\Entity\Temoignages;
@@ -49,6 +49,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Créer un nouveau témoignage', 'fas fa-comments', Temoignages::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Aperçue des témoignages', 'fas fa-eye', Temoignages::class)
         ]);
+
+        yield  MenuItem::linkToCrud('Demandes client', 'fas fa-comments', Contact::class);
 
         
         yield MenuItem::subMenu('Service', 'fa-solid fa-gears')->setSubItems([

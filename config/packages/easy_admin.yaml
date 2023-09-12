@@ -13,3 +13,33 @@ easy_admin:
                 - { property: 'energy', type: 'choice' }
                 - { property: 'images', type: 'collection', type_options: { entry_type: App\Controller\Form\UserCarImageType::class } } 
                 - { property: 'photo', type: 'image', type_options: { base_path: 'uploads/images', upload_dir: 'public/ressources' } }
+        - class: App\Entity\Contact
+          label: 'Contact'
+          form:
+            fields:
+                - 'firstName'
+                - 'lastName'
+                - 'mail'
+                - 'phoneNumber'
+                - 'content'
+          list:
+            fields:
+                - 'id'
+                - 'firstName'
+                - 'lastName'
+                - 'mail'
+                - 'phoneNumber'
+                - 'content'
+                - 'approved'
+            actions:
+                - 'edit'
+                - 'delete'
+          edit:
+            fields:
+                - 'firstName'
+                - 'lastName'
+                - 'mail'
+                - 'phoneNumber'
+                - 'content'
+                - 'approved'
+
