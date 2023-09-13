@@ -4,47 +4,54 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request; // Import manquant pour la classe Request
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\UserCar;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use App\Entity\Contact;
+use App\Entity\Horaire; 
+use App\Form\ContactType;
+use App\Repository\AdresseRepository;
+use App\Repository\HoraireRepository;
+use App\Repository\UserCarRepository;
+use App\Repository\ContactRepository;
+
 
 class UserCarController extends AbstractController
-{   
+{
     private $entityManager;
+    private $contactRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ContactRepository $contactRepository)
     {
         $this->entityManager = $entityManager;
+        $this->contactRepository = $contactRepository;
     }
 
-    #[Route('/usercar', name: 'app_car')]
-    public function appCar(Request $request): Response
-    {
-        $orderBy = $request->query->get('order_by', 'price_asc'); // Ajout du point-virgule
+    #[Route('/car', name: 'app_car', methods: ['GET', 'POST'])]
+    public function index(
+        UserCarRepository $userCarRepository,
+        AdresseRepository $adresseRepository,
+        HoraireRepository $horaireRepository,
+        Request $request
+    ): Response {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
 
-        $cars = $this->entityManager->getRepository(UserCar::class)->findAll();
-        
-        if ($orderBy === 'price_asc') {
-            usort($cars, function ($a, $b) {
-                return $a->getPrice() - $b->getPrice();
-            });
-    
-        } elseif ($orderBy === 'mileage_asc') {
-            usort($cars, function ($a, $b) {
-                return $a->getMileage() - $b->getMileage();
-            });
-      
-        } elseif ($orderBy === 'year_asc') {
-            usort($cars, function ($a, $b) {
-                return $a->getYear() - $b->getYear();
-            });
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($contact);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_contact_success');
         }
-        
+
         return $this->render('usercar/index.html.twig', [
-            'controller_name' => 'UserCarController',
-            'usercars' => $cars,
+            'userCar' => $userCarRepository->findBy([], []),
+            'adresse' => $adresseRepository->findOneBy([], []),
+            'horaire' => $horaireRepository->findBy([], []),
+            'form' => $form->createView(),
         ]);
     }
 }

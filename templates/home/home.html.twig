@@ -67,14 +67,28 @@
         </div>
     </div>
 </section>
-
-<section class="main-section">
-    <!-- Le contenu de votre troisième section -->
+<section class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 text-center my-3 bg-secondary mr-3">
+            <h5>Horaires</h5>
+            <ul>
+                {% for horaire in horaire %}
+                    <li class="text-hover"><strong>{{ horaire.days }}:</strong> {{ horaire.open }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4 text-center my-3 align-self-center bg-secondary ml-3">
+            <h5>Adresse</h5>
+            <ul>
+                {% for adresse in adresse %}
+                    <li class="text-hover"><strong>{{ adresse.street }}:</strong> {{ adresse.city }} {{ adresse.zipCode }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </section>
 
-<footer class="container-footer">
-    <!-- Contenu de votre footer -->
-</footer>
+
 {% endblock %}
 
 

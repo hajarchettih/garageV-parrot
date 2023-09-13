@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TemoignagesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=TemoignagesRepository::class)
@@ -16,6 +17,29 @@ class Temoignages
  * @ORM\Column(type="integer")
  */
         private int $id;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
 
     /**
      * @ORM\Column(type="string", length=255)

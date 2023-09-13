@@ -26,7 +26,7 @@ class TemoignagesController extends AbstractController
     }
 
     #[Route('/temoignages', name: 'app_temoignages', methods: ['GET', 'POST'])]
-        public function index(Request $request, AdresseRepository $adresseRepository, HoraireRepository $horaireRepository, TemoignagesRepository $temoignagesRepository): Response
+public function index(Request $request, AdresseRepository $adresseRepository, HoraireRepository $horaireRepository): Response
 {
     $temoignages = new Temoignages();
     $temoignages->setApproved(false);
@@ -47,8 +47,8 @@ class TemoignagesController extends AbstractController
             return $this->redirectToRoute('app_temoignages_success');
         }
     }
-    
-    $temoignages = $temoignagesRepository->findApprovedTemoignages();
+
+    $temoignages = $this->temoignagesRepository->findApprovedTemoignages();
 
     return $this->render('temoignages/index.html.twig', [
         'form' => $form->createView(),
@@ -57,6 +57,7 @@ class TemoignagesController extends AbstractController
         'temoignages' => $temoignages, 
     ]);
 }
+
     
 
     #[Route('/temoignages/success', name: 'app_temoignages_success', methods: ['GET'])]

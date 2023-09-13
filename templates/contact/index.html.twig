@@ -13,6 +13,20 @@
     </div>
 </div>
 
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <h3>Adresse</h3>
+        {% for adresse in adresse %}
+        <ul>
+            <li>Street : {{ adresse.street }}</li>
+            <li>City : {{ adresse.city }}</li>
+            <li>ZipCode : {{ adresse.zipCode }}</li>
+            <li>Phone Number : {{ adresse.phoneNumber }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
 
 {% block title %}Formulaire de contact{% endblock %}
 

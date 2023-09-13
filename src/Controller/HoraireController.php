@@ -6,23 +6,31 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\HoraireRepository; 
+
 
 class HoraireController extends AbstractController
 {
-    private $entityManager;
+    private $horaireRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(HoraireRepository $horaireRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->horaireRepository = $horaireRepository;
     }
 
     #[Route('/horaire', name: 'app_horaire')]
     public function index(): Response
     {
-        $this->entityManager;
+        // Récupérez les horaires à partir du repository
+        $horaires = $this->horaireRepository->findAll(); // Vous pouvez utiliser une autre méthode de requête si nécessaire
 
         return $this->render('horaire/index.html.twig', [
-            'controller_name' => 'HoraireController',
+            'horaires' => $horaires, // Passez les horaires à votre template
         ]);
     }
 }
+
+
+
+
+

@@ -26,7 +26,7 @@ app_temoignages:
 app_usercar:
     path: /usercar
     controller: App\Controller\UserCarController::index
-    methods: GET
+    methods: ['GET', 'POST']
 
 app_horaire:
     path: /horaire
