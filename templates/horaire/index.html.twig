@@ -1,12 +1,14 @@
-<div class="row my-4">
-    <div class="col-md-6 offset-md-3">
-        <h3>Horaires</h3>
-        <ul>
-            {% for horaire in horaire %}
-                <li>{{ horaire.days }} : {{ horaire.open }}</li>
-            {% endfor %}
-        </ul>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row my-4">
+        <div class="col-md-6 offset-md-3">
+            <h3>Horaires</h3>
+            <ul>
+                {% for horaire in horaires %}
+                    <li>{{ horaire.days }} : {{ horaire.open }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</div>
-
-
+{% endblock %}

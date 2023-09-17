@@ -110,6 +110,37 @@ h5 {
   color: #F2F2F2;
 }
 
+/* Style du footer */
+.footer {
+  background-color: #D92332;
+  color: #F2F2F2;
+  padding: 20px 0;
+}
+
+/* Style pour le contenu du footer */
+.footer h3 {
+  font-size: 18px;
+}
+
+.footer ul, .footer ol {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer li {
+  margin-bottom: 10px;
+}
+
+/* Style pour la mise en page responsive */
+@media (max-width: 767px) {
+  .footer .col-md-6 {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+}
+
+
+
 
 
 

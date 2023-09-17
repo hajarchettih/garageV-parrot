@@ -46,14 +46,14 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('app_contact_success');
         }
 
-        $adresse = $adresseRepository->findOneBy([], []);
-        $horaire = $horaireRepository->findAll();
+        $adresses = $adresseRepository->findOneBy([], []);
+        $horaires = $horaireRepository->findAll();
 
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
             'form' => $form->createView(),
-            'adresse' => $adresseRepository->findOneBy([], []),
-            'horaire' => $horaireRepository->findBy([], []),
+            'adresses' => $adresseRepository->findOneBy([], []),
+            'horaires' => $horaireRepository->findBy([], []),
             'userCar' => $userCarRepository->findBy([], []),
         ]);
     }

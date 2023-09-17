@@ -45,6 +45,10 @@ admin_temoignages_desapprouver:
     methods: POST  # Vous devriez utiliser POST pour des opérations de modification
     requirements:
         id: \d+  # Assurez-vous que l'ID est un nombre
+        
+
+
+
 
 
 

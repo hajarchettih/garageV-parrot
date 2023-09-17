@@ -3,18 +3,38 @@
 {% block title %}Nos Services{% endblock %}
 
 {% block body %}
-{% for service in services %}
-    <div class="col-auto col-md-auto service-filter">
-        <div class="card m-1 event-card my-custom-card">
-           
-            <h5 class="card-title">{{ service.name }}</h5>
-            <div class="custom-card-text mx-auto">
-                <p class="desc">{{ service.content }}</p>
-                
+<div class="container">
+    <div class="row">
+        {% for service in services %}
+            <div class="col-auto col-md-auto service-filter">
+                <div class="card m-1 event-card my-custom-card">
+                    <h5 class="card-title">{{ service.name }}</h5>
+                    <div class="custom-card-text mx-auto">
+                        <p class="desc">{{ service.content }}</p>
+                    </div>
+                </div>
             </div>
+        {% endfor %}
+
+        <div class="col-md-6 offset-md-3">
+            <h3>Horaires</h3>
+            <ul>
+                {% for horaire in horaires %}
+                    <li>{{ horaire.days }} : {{ horaire.open }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-6 offset-md-3">
+            <h3>Adresse</h3>
+            <ul>
+                {% for adresse in adresses %}
+                    <li><strong>{{ adresse.street }}:</strong> {{ adresse.city }} {{ adresse.zipCode }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-{% endfor %}
-
+</div>
 {% endblock %}
+
 

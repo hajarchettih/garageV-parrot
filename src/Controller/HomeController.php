@@ -21,8 +21,8 @@ class HomeController extends AbstractController
 
         return $this->render('home/home.html.twig', [
             'temoignages' => $temoignages,
-            'horaire' => $horaire, // Passez les horaires à la vue
-            'adresse' => $adresse,
+            'horaires' => $horaire, // Passez les horaires à la vue
+            'adresses' => $adresse,
         ]);
     }
 }

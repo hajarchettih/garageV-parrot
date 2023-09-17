@@ -47,10 +47,13 @@ class UserCarController extends AbstractController
             return $this->redirectToRoute('app_contact_success');
         }
 
+        $adresse = $adresseRepository->findOneBy([]);
+        $horaire = $horaireRepository->findOneBy([]);
+
         return $this->render('usercar/index.html.twig', [
             'userCar' => $userCarRepository->findBy([], []),
-            'adresse' => $adresseRepository->findOneBy([], []),
-            'horaire' => $horaireRepository->findBy([], []),
+            'adresses' => $adresseRepository->findOneBy([], []),
+            'horaires' => $horaireRepository->findBy([], []),
             'form' => $form->createView(),
         ]);
     }
