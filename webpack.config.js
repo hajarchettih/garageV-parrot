@@ -9,9 +9,10 @@ Encore
 
     .setOutputPath('public/build/')
     .setPublicPath('/build')
-    .addEntry('app', './public/build/assets/app.js')
-    .addEntry('filtre', './public/build/assets/filtre.js')
-    .addStyleEntry('css/app', './public/build/assets/app.css')
+    .addEntry('app', './assets/styles/app.js')
+    .addEntry('filtre', './assets/styles/filtre.js')
+    .addStyleEntry('styles', './assets/styles/app.css')
+
     .splitEntryChunks()
 
 
