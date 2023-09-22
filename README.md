@@ -9,7 +9,7 @@ Non déployé, disponible en local en clonant le projet.
 
 ## Environnement de travail
 + PHP 8 ou version supérieur
-+ UN serveur de BDD compatible avec Symfony (par ex. MySQL)
++ Un serveur de BDD compatible avec Symfony (par ex. MySQL)
 + Un serveur web (par.ex Wampserver)
 + Un gestionnaire de dépendance (par ex.composer)
 
@@ -17,14 +17,16 @@ Non déployé, disponible en local en clonant le projet.
 
 Depuis votre terminal, lancez cette commande `git clone https://github.com/hajarchettih/garageV-parrot.git`
 
-+Accéder au repertoire du projet :
++ Accéder au repertoire du projet :
 `~ cd garageV-parrot`
-+Installez les dépendances requises en utilisant Composer :
++ Installez les dépendances requises en utilisant Composer :
 ` ~ composer install`
 ` ~ composer require webapp`
 
-+Modifier le fichier .env à la racine du projet :
++ Modifier le fichier .env à la racine du projet :
 `DATABASE_URL="mysql://nom_utilisateur:mot_de_passe@127.0.0.1:port/nom_du_projet?serverVersion=8&charset=utf8mb4"`
+
+
 
 
 
