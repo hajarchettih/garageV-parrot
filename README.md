@@ -37,7 +37,23 @@ git clone https://github.com/hajarchettih/garageV-parrot.git
 ```
 DATABASE_URL="mysql://nom_utilisateur:mot_de_passe@127.0.0.1:port/nom_du_projet?serverVersion=8&charset=utf8mb4"
 ```
++ Créez la base de données en exécutant la commande suivante :
+```
+ ~ symfony console doctrine:database:create
+```
++ Créez les tables en utilisant les entités de votre application, attention vous aurez besoin du MakerBundle de Symfony pour exécuter ces commandes :
+```
+~ symfony console make:migration
+~ symfony console doctrine:migrations:migrate
+```
 
++ Démarrez le serveur Web interne de Symfony en exécutant la commande suivante :
+  
+```
+~ symfony console serve -d
+```
+
+**Votre application Symfony est maintenant déployée et accessible à l'adresse http://127.0.0.1:8000**
 
 
 
