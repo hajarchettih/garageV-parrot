@@ -55,6 +55,17 @@ DATABASE_URL="mysql://nom_utilisateur:mot_de_passe@127.0.0.1:port/nom_du_projet?
 
 **Votre application Symfony est maintenant déployée et accessible à l'adresse http://127.0.0.1:8000**
 
+**Pour vous connecter en tant qu'administrateur sur le site, il vous faudra créer un utilisateur avec un 'ROLE_ADMIN' qui pourra gérer les fonctionnalités.**
+
++ Rendez-vous en base de données via PhpMyAdmin
+
++ Lancez la requête SQL :
+```
+  ~ INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES (NULL, ‘vparrot@free.fr', '[\"ROLE_ADMIN\"]', 'garage')
+```
+
+Vous voilà prêt à exploiter le back-end du site, n'oubliez pas de hacher le mot de passe pour que celui-ci soit sécurisé.
+
 
 
 
