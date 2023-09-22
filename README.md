@@ -20,9 +20,14 @@ Depuis votre terminal, lancez cette commande :
 
 + Accéder au repertoire du projet :
 `~ cd garageV-parrot`
+
 + Installez les dépendances requises en utilisant Composer :
+```
 ` ~ composer install`
 ` ~ composer require webapp`
+git commit
+```
+
 
 + Modifier le fichier .env à la racine du projet :
 `DATABASE_URL="mysql://nom_utilisateur:mot_de_passe@127.0.0.1:port/nom_du_projet?serverVersion=8&charset=utf8mb4"`
