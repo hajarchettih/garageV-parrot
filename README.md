@@ -10,3 +10,10 @@ Les employés ont également accès au tableau de bord d'administration, mais le
 ## Installer le projet en local
 
 Depuis votre terminal, lancez cette commande `git clone https://github.com/hajarchettih/garageV-parrot.git`
+
+
+## Environnement de travail
++ PHP 8 ou version supérieur
++ UN serveur de BDD compatible avec Symfony (par ex. MySQL)
++ Un serveur web (par.ex Wampserver)
++ Un gestionnaire de dépendance (par ex.composer)
