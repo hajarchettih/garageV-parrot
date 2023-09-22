@@ -17,21 +17,12 @@
         {% endfor %}
 
         <div class="col-md-6 offset-md-3">
-            <h3>Horaires</h3>
-            <ul>
-                {% for horaire in horaires %}
-                    <li>{{ horaire.days }} : {{ horaire.open }}</li>
-                {% endfor %}
-            </ul>
+            
         </div>
 
         <div class="col-md-6 offset-md-3">
-            <h3>Adresse</h3>
-            <ul>
-                {% for adresse in adresses %}
-                    <li><strong>{{ adresse.street }}:</strong> {{ adresse.city }} {{ adresse.zipCode }}</li>
-                {% endfor %}
-            </ul>
+    
+        
         </div>
     </div>
 </div>

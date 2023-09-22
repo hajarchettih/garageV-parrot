@@ -5,8 +5,8 @@
                 <h3>Horaires</h3>
                 <ul>
                     {% if horaire is defined %}
-                        {% for hor in horaire %}
-                            <li>{{ hor.days }} : {{ hor.open }}</li>
+                        {% for horaire in horaire %}
+                            <li>{{ horaire.days }} : {{ horaire.open }}</li>
                         {% endfor %}
                     {% endif %}
                 </ul>
@@ -15,11 +15,11 @@
                 <h3>Adresse</h3>
                 <ol>
                     {% if adresse is defined %}
-                        {% for adr in adresse %}
-                            <li>Street : {{ adr.street }}</li>
-                            <li>City : {{ adr.city }}</li>
-                            <li>ZipCode : {{ adr.zipCode }}</li>
-                            <li>Phone Number : {{ adr.phoneNumber }}</li>
+                        {% for adresse in adresse %}
+                            <li>Street : {{ adresse.street }}</li>
+                            <li>City : {{ adresse.city }}</li>
+                            <li>ZipCode : {{ adresse.zipCode }}</li>
+                            <li>Phone Number : {{ adresse.phoneNumber }}</li>
                         {% endfor %}
                     {% endif %}
                 </ol>
