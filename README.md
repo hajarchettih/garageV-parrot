@@ -15,7 +15,8 @@ Non déployé, disponible en local en clonant le projet.
 
 ## Installer le projet en local
 
-Depuis votre terminal, lancez cette commande `git clone https://github.com/hajarchettih/garageV-parrot.git`
+Depuis votre terminal, lancez cette commande :
+`git clone https://github.com/hajarchettih/garageV-parrot.git`
 
 + Accéder au repertoire du projet :
 `~ cd garageV-parrot`
