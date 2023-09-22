@@ -15,18 +15,19 @@ Non déployé, disponible en local en clonant le projet.
 
 ## Installer le projet en local
 
-Depuis votre terminal, lancez cette commande :
-`git clone https://github.com/hajarchettih/garageV-parrot.git`
+
++ Depuis votre terminal, lancez cette commande :
+```
+git clone https://github.com/hajarchettih/garageV-parrot.git
+```
 
 + Accéder au repertoire du projet :
-`~ cd garageV-parrot`
+```
+~ cd garageV-parrot
+```
 
 + Installez les dépendances requises en utilisant Composer :
-```
-` ~ composer install`
-` ~ composer require webapp`
-git commit
-```
+
 
 
 + Modifier le fichier .env à la racine du projet :
