@@ -22,10 +22,10 @@ class HoraireController extends AbstractController
     public function index(): Response
     {
         // Récupérez les horaires à partir du repository
-        $horaires = $this->horaireRepository->findAll(); // Vous pouvez utiliser une autre méthode de requête si nécessaire
+        $horaires = $this->horaireRepository->findAll(); 
 
         return $this->render('horaire/index.html.twig', [
-            'horaires' => $horaires, // Passez les horaires à votre template
+            'horaire' => $horaires, 
         ]);
     }
 }
