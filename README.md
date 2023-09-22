@@ -5,15 +5,31 @@ Ce projet concerne la création d'un site web pour un garage fictif qui propose 
 Les employés ont également accès au tableau de bord d'administration, mais leurs autorisations sont limitées par rapport à celles de l'administrateur. Ils peuvent effectuer certaines tâches spécifiques assignées, contribuant ainsi au bon fonctionnement du site et à la satisfaction des clients.
 
 ## Lien du site
-/
-
-## Installer le projet en local
-
-Depuis votre terminal, lancez cette commande `git clone https://github.com/hajarchettih/garageV-parrot.git`
-
+Non déployé, disponible en local en clonant le projet. 
 
 ## Environnement de travail
 + PHP 8 ou version supérieur
 + UN serveur de BDD compatible avec Symfony (par ex. MySQL)
 + Un serveur web (par.ex Wampserver)
 + Un gestionnaire de dépendance (par ex.composer)
+
+## Installer le projet en local
+
+Depuis votre terminal, lancez cette commande `git clone https://github.com/hajarchettih/garageV-parrot.git`
+
++Accéder au repertoire du projet :
+`~ cd garageV-parrot`
++Installez les dépendances requises en utilisant Composer :
+` ~ composer install`
+` ~ composer require webapp`
+
++Modifier le fichier .env à la racine du projet :
+`DATABASE_URL="mysql://nom_utilisateur:mot_de_passe@127.0.0.1:port/nom_du_projet?serverVersion=8&charset=utf8mb4"`
+
+
+
+
+
+
+
+
